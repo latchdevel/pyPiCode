@@ -11,9 +11,9 @@ Copyright (c) 2022 Jorge Rivera. All right reserved.
 License GNU Lesser General Public License v3.0.
 """
 
-from ast  import literal_eval
-from copy import deepcopy
-from re   import sub
+from ast  import literal_eval as _literal_eval
+from copy import deepcopy as _deepcopy
+from re   import sub as _sub
 
 # Import picode wrapper module as private module
 from pypicode import picode_wrap as _picode_wraper
@@ -101,7 +101,7 @@ def encodeToPulseTrain(protocol, json_data:dict):
     pulses = _picode_wraper.uint32Array(_picode_wraper.protocol_maxrawlen())
 
     # Make a deep copy of json_data dict to change it to support a dict out as dict in
-    json_data_copy = deepcopy(json_data)
+    json_data_copy = _deepcopy(json_data)
 
     if len(json_data_copy) > 0:
         if 'state' in json_data_copy:
@@ -142,7 +142,7 @@ def encodeToPulseTrainByName(protocol_name:str, json_data:dict):
     pulses = _picode_wraper.uint32Array(_picode_wraper.protocol_maxrawlen())
 
     # Make a deep copy of json_data dict to change it to support a dict out as dict in
-    json_data_copy = deepcopy(json_data)
+    json_data_copy = _deepcopy(json_data)
 
     if len(json_data_copy) > 0:
         if 'state' in json_data_copy:
@@ -208,7 +208,7 @@ def decodePulseTrain(pulses_list:list):
     for i in range(len(pulses_list)):
         pulses[i]=pulses_list[i]
 
-    result = literal_eval(_picode_wraper.decodePulseTrain(pulses.cast(), len(pulses_list), ""))
+    result = _literal_eval(_picode_wraper.decodePulseTrain(pulses.cast(), len(pulses_list), ""))
 
     pulses.__swig_destroy__(pulses)
 
@@ -230,8 +230,8 @@ def decodeString(pilight_string:str):
     decoded_protocols = _picode_wraper.decodeString(pilight_string)
 
     if (isinstance(decoded_protocols,str)):
-        decoded_protocols = sub("\n\ *","",decoded_protocols)
-        result = literal_eval(decoded_protocols)
+        decoded_protocols = _sub("\n\ *","",decoded_protocols)
+        result = _literal_eval(decoded_protocols)
         if not isinstance(result,dict):
             result = None
     else:
@@ -258,7 +258,7 @@ def encodeToString(protocol_name:str, json_data:dict, repeats:int=0):
         raise TypeError("in method 'encodeToString', argument 3 'repeats' must be in range from 0 to 255.")
 
     # Make a deep copy of json_data dict to change it to support a dict out as dict in
-    json_data_copy = deepcopy(json_data)
+    json_data_copy = _deepcopy(json_data)
 
     if len(json_data_copy) > 0:
         if 'state' in json_data_copy:
@@ -292,7 +292,7 @@ def encodeJson(json:dict, repeats:int=0):
         raise TypeError("in method 'encodeJson', argument 2 'repeats' must be in range from 0 to 255.")
 
     # Make a deep copy of json dict to change it to support a dict out as dict in
-    json_copy = deepcopy(json)
+    json_copy = _deepcopy(json)
 
     if len(json_copy) > 0:
         if 'state' in json_copy[list(json_copy.keys())[0]]:
