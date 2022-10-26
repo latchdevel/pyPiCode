@@ -9,7 +9,7 @@ License GNU Lesser General Public License v3.0.
 
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
-import os
+import os, pathlib, subprocess
 
 # Add cmake_lists_dir to Extension
 class CMakeExtension(Extension):
@@ -63,6 +63,46 @@ class cmake_build_ext(build_ext):
             print ("\nCMake build:")
             subprocess.check_call(['cmake', '--build', '.', '--config', build_type], cwd=self.build_temp )
             print ("CMake build done!\n")
+
+# Return the git revision as a string or None on failuire.
+def git_revision(path='.'):
+    def _minimal_ext_cmd(cmd):
+        # construct minimal environment
+        env = {}
+        for k in ['SYSTEMROOT', 'PATH']:
+            v = os.environ.get(k)
+            if v is not None:
+                env[k] = v
+        # LANGUAGE is used on win32
+        env['LANGUAGE'] = 'C'
+        env['LANG'] = 'C'
+        env['LC_ALL'] = 'C'
+        out = subprocess.Popen(cmd, stdout = subprocess.PIPE, stderr=subprocess.DEVNULL, env=env).communicate()[0]
+        return out
+
+    try:
+        out = _minimal_ext_cmd(['git', '-C', path, 'rev-parse', '--short', 'HEAD'])
+        GIT_REVISION = out.strip().decode('ascii')
+    except:
+        GIT_REVISION = None
+
+    return GIT_REVISION
+
+# Get git short commit of the PiCode library if available
+revision = git_revision("libs/PiCode")
+
+if revision:
+    # Get concrete path of '.revision.out' file. Must be add to .gitignore and MANIFEST.in
+    REVISION_FILE = pathlib.Path(".revision.out")  
+
+    # Write git short commit of the PiCode library to '.revision.out' file
+    try:
+        with REVISION_FILE.open("w") as f:
+            print(revision, file=f, end="")
+        
+        print("writing PiCode library revision '%s'" % revision)
+    except:
+        print("Error: unable to write '.revision.out' file.")
 
 setup(
     name="pypicode",
