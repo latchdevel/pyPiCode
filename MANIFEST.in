@@ -1,0 +1,9 @@
+include picode_wrap.c
+include picode_wrap.i
+include CMakeLists.txt
+include .revision.out
+graft   libs
+exclude libs/PiCode/.git
+exclude libs/PiCode/.gitignore
+prune   libs/PiCode/.github
+global-exclude .gitmodules
