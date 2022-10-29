@@ -8,8 +8,8 @@ The [**PiCode library**](http://github.com/latchdevel/PiCode) provides an easy w
 The PiCode library is a standard C/C++ library, both static and dynamic, that works on any libc/libc++ compatible system, such as macOS, FreeBSD, Linux, and even Windows.
 
 Using [SWIG](https://www.swig.org/), to generate the Python C extension source files that wraps PiCode's static C library:
-- `picode_wrap.c`: CMake compiles the C source file, as does the PiCode library, and they link together to build the Python C extension module.
-- `picode_wrap.py`: Python functions of the picode wrapper module are redefined to add basic docstrings and parameter checks in `__init__.py` package file.
+- [**picode_wrap.c**](pypicode.c): CMake compiles the C source file, as does the PiCode library, and they link together to build the Python C extension module.
+- [**picode_wrap.py**](pypicode/picode_wrap.py): Python functions of the picode wrapper module are redefined to add basic docstrings and parameter checks in [**__init__.py**](pypicode/__init__.py) package file.
 
 ## Install
 Package installation builds the C extension module, so some OS tools are required like these packages on Debian-based Linux systems:
@@ -122,4 +122,4 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program; if not, write to the Free Software Foundation,
 Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-See the [LICENSE](LICENSE) file for license rights and limitations (lgpl-3.0).
+See the [LICENSE](LICENSE.txt) file for license rights and limitations (lgpl-3.0).
