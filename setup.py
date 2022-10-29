@@ -106,7 +106,7 @@ if revision:
 
 setup(
     name="pypicode",
-    version="0.1",
+    version="0.1.0",
     packages=["pypicode","pypicode.tests"],
     url="https://github.com/latchdevel/pyPiCode",
     author="Jorge Rivera",
@@ -120,12 +120,18 @@ setup(
     license='LGPL-3.0',
     license_files=["LICENSE.txt"],
     classifiers=[ # https://pypi.org/pypi?%3Aaction=list_classifiers
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Programming Language :: C",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
-        "Operating System :: OS Independent",
-        "Intended Audience :: Developers",
-        "Development Status :: 4 - Beta"
+        "Topic :: Software Development",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Scientific/Engineering",
+        "Operating System :: OS Independent"
     ],
     platforms=["any"],
     test_suite = 'pypicode.tests'
