@@ -41,62 +41,62 @@ $ python3 -m unittest discover -v pypicode
 
 ## Functions:
 
-+ **`decodePulseTrain`**`(pulses_list: list)`
++ **`decodePulseTrain(pulses_list: list)`**
 
     Decodes a list of pulses to a results dict.
 
     Returns a dict always, with a key "protocols" and a list of decoded protocols as its value,
     which will be empty if none are decoded, like as { 'protocols': [ ] }
 
-+ **`decodeString`**`(pilight_string: str)`
++ **`decodeString(pilight_string: str)`**
   
     Decodes a string in pilight format to a results dict.
 
     Returns a dict with a key "protocols" and a list of decoded protocols as its value, or None on failure.
 
-+ **`encodeJson`**`(json: dict, repeats: int = 0)`
++ **`encodeJson(json: dict, repeats: int = 0)`**
 
     Encodes a full json dict to a string in pilight format.
 
     Returns a pilight string or None on failure.
 
-+ **`encodeToPulseTrain`**`(protocol, json_data: dict)`
++ **`encodeToPulseTrain(protocol, json_data: dict)`**
 
     Encodes a Swig Object of type 'protocol_t *' and a json data dict to a pulses list.
 
     Returns a pulses list or None on failure.
 
-+ **`encodeToPulseTrainByName`**`(protocol_name: str, json_data: dict)`
++ **`encodeToPulseTrainByName(protocol_name: str, json_data: dict)`**
 
     Encodes a protocol name string and a json data dict to a pulses list.
 
     Returns a pulses list or None on failure.
 
-+ **`encodeToString`**`(protocol_name: str, json_data: dict, repeats: int = 0)`
++ **`encodeToString(protocol_name: str, json_data: dict, repeats: int = 0)`**
 
     Encodes a protocol name string and a json data dict to a string in pilight format.
 
     Returns a pilight string or None on failure.
 
-+ **`findProtocol`**`(name: str)`
++ **`findProtocol(name: str)`**
 
     Find a protocol among all those initialized by name.
 
     Returns a Swig Object of type 'protocol_t *' or None on failure.
 
-+ **`getPiCodeVersion`**`()`
++ **`getPiCodeVersion()`**
 
     Get version of PiCode library.
 
     Returns the full version string of the PiCode library or None on failure.
 
-+ **`pulseTrainToString`**`(pulses_list: list, repeats: int = 0)`
++ **`pulseTrainToString(pulses_list: list, repeats: int = 0)`**
 
     Converts a list of pulses to a string in pilight format.
 
     Returns a pilight string or None on failure.
 
-+ **`stringToPulseTrain`**`(pilight_string: str)`
++ **`stringToPulseTrain(pilight_string: str)`**
 
     Converts a string in pilight format to a pulses lists.
     
