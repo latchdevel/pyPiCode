@@ -3,12 +3,12 @@ Python C extension module to wrap the PiCode library.
 
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-The [**PiCode library**](http://github.com/latchdevel/PiCode) provides an easy way to handle the wireless protocols of weather stations and radio control switches using 433/315Mhz radio frequency in ASK/OOK modulation, which have been implemented by the [pilight project](https://manual.pilight.org/protocols/433.92/index.html)
+The [**PiCode library**](http://github.com/latchdevel/PiCode) provides an easy way to handle the wireless protocols of weather stations and radio control switches using 315Mhz/433Mhz radio frequency in ASK/OOK modulation, which have been implemented by the [**"pilight"** project](https://manual.pilight.org/protocols/433.92/index.html)
 
 The PiCode library is a standard C/C++ library, both static and dynamic, that works on any libc/libc++ compatible system, such as macOS, FreeBSD, Linux, and even Windows.
 
 Using [SWIG](https://www.swig.org/), to generate the Python C extension source files that wraps PiCode's static C library:
-- [**picode_wrap.c**](pypicode_wrap.c): CMake compiles the C source file, as does the PiCode library, and they link together to build the Python C extension module.
+- [**picode_wrap.c**](picode_wrap.c): CMake compiles the C source file, as does the PiCode library, and they link together to build the Python C extension module.
 - [**picode_wrap.py**](pypicode/picode_wrap.py): Python functions of the picode wrapper module are redefined to add basic docstrings and parameter checks in [**__init__.py**](pypicode/__init__.py) package file.
 
 ## Install

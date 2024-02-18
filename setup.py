@@ -64,7 +64,7 @@ class cmake_build_ext(build_ext):
             subprocess.check_call(['cmake', '--build', '.', '--config', build_type], cwd=self.build_temp )
             print ("CMake build done!\n")
 
-# Return the git revision as a string or None on failuire.
+# Return the git revision as a string or None on failure.
 def git_revision(path='.'):
     def _minimal_ext_cmd(cmd):
         # construct minimal environment
