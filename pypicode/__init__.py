@@ -7,9 +7,18 @@ in ASK/OOK modulation, which have been implemented by the 'pilight' project.
 
 See: https://github.com/latchdevel/pyPiCode
 
-Copyright (c) 2022 Jorge Rivera. All right reserved.
+Copyright (c) 2022-2024 Jorge Rivera. All right reserved.
 License GNU Lesser General Public License v3.0.
 """
+
+__version__ = '0.1.0'
+__title__ = 'pypicode'
+__description__ = 'Python C extension module to wrap the PiCode library.'
+__uri__ = 'https://github.com/latchdevel/pyPiCode'
+__doc__ = __description__ + ' <' + __uri__ + '>'
+__author__ = 'Jorge Rivera'
+__license__ = 'LGPL-3.0'
+__copyright__ = 'Copyright (c) 2022-2024 Jorge Rivera. All right reserved.'
 
 from ast  import literal_eval as _literal_eval
 from copy import deepcopy as _deepcopy
