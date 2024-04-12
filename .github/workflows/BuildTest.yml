@@ -1,0 +1,67 @@
+# This is the name of the workflow, visible on GitHub UI.
+name: 'Build tests'
+
+# Controls when the action will run. 
+# Here we tell GitHub to run the workflow when a commit.
+on: 
+  push:
+  pull_request:
+
+  # Scheduled the first day of every month at 00:00h UTC
+  schedule:
+    - cron:  '0 0 1 * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+  
+    # This is the name of the job
+    name: 'Build for ${{ matrix.config.name }}'
+
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows, Linux or Mac. 
+    runs-on: ${{ matrix.config.os }}
+
+    # Here we tell GitHub that the jobs must be determined
+    # dynamically depending on a matrix configuration.
+    strategy:
+      
+      # Set to false so that GitHub does not cancel all jobs
+      # in progress if any array job fails.
+      fail-fast: false
+
+      # The matrix will produce one job for each configuration:
+      matrix:
+        config:
+          - name: 'Linux'
+            os: 'ubuntu-latest'
+
+          - name: 'macOS'
+            os: 'macos-latest'
+  
+          - name: 'Windows'
+            os: 'windows-latest'
+
+    # This is the list of steps this job will run.
+    steps:
+        # Clone repo using the checkout action.
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+        # Build and install pyPiCode Python module.
+      - name: Build and install Python module
+        run: python -m pip install -v --user .
+
+        # Test pyPiCode Python module.
+      - name: Run unit test Python module
+        if: ${{ matrix.config.name != 'Windows' }}
+        run: python -m unittest discover -v pypicode
+
+        # Run pyPiCode example code.
+      - name: Run pyPiCode example
+        if: ${{ matrix.config.name != 'Windows' }}
+        run: python pypicode_example.py
