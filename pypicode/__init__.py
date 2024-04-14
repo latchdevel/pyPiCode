@@ -239,7 +239,7 @@ def decodeString(pilight_string:str):
     decoded_protocols = _picode_wraper.decodeString(pilight_string)
 
     if (isinstance(decoded_protocols,str)):
-        decoded_protocols = _sub("\n\ *","",decoded_protocols)
+        decoded_protocols = _sub(r"\n\ *","",decoded_protocols)
         result = _literal_eval(decoded_protocols)
         if not isinstance(result,dict):
             result = None
