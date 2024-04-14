@@ -95,9 +95,10 @@ include_directories( ${Python_INCLUDE_DIRS} )
 # Shared libraries need flag -fPIC
 set_property( TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE TRUE ) 
 
-# If macOS system, force mark all undefined symbols as having to be looked up at runtime
+# If macOS system, builds a Mach-O universal binary with 2 architectures: x86_64 and arm64 for Apple M processors
 if (APPLE) 
-  set(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup" )
+  set_property( TARGET ${PROJECT_NAME} PROPERTY COMPILE_FLAGS "-arch arm64 -arch x86_64" )
+  set_property( TARGET ${PROJECT_NAME} PROPERTY LINK_FLAGS "-arch arm64 -arch x86_64" )
 endif()
 
 # Add cPiCode library static link 
