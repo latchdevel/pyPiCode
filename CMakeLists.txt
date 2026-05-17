@@ -99,6 +99,7 @@ set_property( TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE TRUE )
 if (APPLE) 
   set_property( TARGET ${PROJECT_NAME} PROPERTY COMPILE_FLAGS "-arch arm64 -arch x86_64" )
   set_property( TARGET ${PROJECT_NAME} PROPERTY LINK_FLAGS "-arch arm64 -arch x86_64" )
+  set( CMAKE_OSX_DEPLOYMENT_TARGET "11.0" )
 endif()
 
 # Add cPiCode library static link 
