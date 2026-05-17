@@ -123,7 +123,6 @@ setup(
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Programming Language :: C",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -133,6 +132,5 @@ setup(
         "Topic :: Scientific/Engineering",
         "Operating System :: OS Independent"
     ],
-    platforms=["any"],
-    test_suite = 'pypicode.tests'
+    platforms=["any"]
 )
