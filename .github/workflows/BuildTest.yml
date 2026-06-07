@@ -18,11 +18,11 @@ jobs:
   build:
   
     # This is the name of the job
-    name: 'Build for ${{ matrix.config.name }}'
+    name: 'Build on ${{ matrix.platform }} using Python ${{ matrix.python-version }}'
 
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows, Linux or Mac. 
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.platform }}
 
     # Here we tell GitHub that the jobs must be determined
     # dynamically depending on a matrix configuration.
@@ -34,23 +34,29 @@ jobs:
 
       # The matrix will produce one job for each configuration:
       matrix:
-        config:
-          - name: 'Linux'
-            os: 'ubuntu-latest'
-
-          - name: 'macOS'
-            os: 'macos-latest'
-  
-          - name: 'Windows'
-            os: 'windows-latest'
+        platform: [windows-2022, windows-latest, macos-15-intel, macos-latest, ubuntu-latest]
+        python-version: ["3.8", "3.11", "3.13"]
+        exclude:
+          - platform: macos-latest
+            python-version: "3.8"
 
     # This is the list of steps this job will run.
     steps:
         # Clone repo using the checkout action.
-      - name: Checkout
+      - name: Checkout with recursive submodules
         uses: actions/checkout@v6
         with:
           submodules: recursive
+
+        # Install Python version from matrix.
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+        # Install Python requirements for module build.
+      - name: Add Python requirements for module build
+        run: python -m pip install --upgrade pip wheel setuptools
 
         # Build and install pyPiCode Python module.
       - name: Build and install Python module
@@ -58,10 +64,8 @@ jobs:
 
         # Test pyPiCode Python module.
       - name: Run unit test Python module
-        if: ${{ matrix.config.name != 'Windows' }}
-        run: python -m unittest discover -v pypicode
+        run: python -m unittest discover -v
 
         # Run pyPiCode example code.
       - name: Run pyPiCode example
-        if: ${{ matrix.config.name != 'Windows' }}
         run: python pypicode_example.py
